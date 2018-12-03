@@ -1,5 +1,5 @@
 class WebsitesController < ApplicationController
-    before_action :find_website, only: [:queue]
+    before_action :find_website, only: [:queue, :update_page]
 
   def index
     render json: Website.all
@@ -20,7 +20,7 @@ class WebsitesController < ApplicationController
   end
 
   def queue
-    batch = WebsiteService.pageBatch(website: @website, params: params)
+    batch = WebsiteService.get_page_batch(website: @website, params: params)
 
     if batch
         render json: {
@@ -34,6 +34,10 @@ class WebsitesController < ApplicationController
     else            
         render json: { success: false, message: "There was an error retrieving the batch." }
     end
+  end
+
+  def update_page
+    render json: WebsiteService.update_page(website: @website, params: params)
   end
 
     private
