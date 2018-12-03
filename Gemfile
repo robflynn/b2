@@ -18,16 +18,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Database annotations
-    gem 'annotate'
+  gem 'annotate'
 
   gem 'rubocop'
 
-  gem 'guard'
-  gem 'guard-livereload', '~> 2.5', require: false
-  gem 'rack-livereload'
-  gem 'rb-fsevent', require: false
-
   # Process launcher
   gem 'foreman'
-    
+
 end
