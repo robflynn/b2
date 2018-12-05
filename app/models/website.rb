@@ -12,6 +12,10 @@
 #  updated_at   :datetime         not null
 #  domain       :string(255)
 #
+# Indexes
+#
+#  index_websites_on_status  (status)
+#
 
 class Website < ApplicationRecord
     # Define our statuses

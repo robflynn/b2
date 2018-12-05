@@ -11,11 +11,11 @@ class WebsitesController < ApplicationController
     if website
         render json: website
     else
-        render json: { 
-                        success: false, 
-                        message: "Could not create message" 
-                     },                      
-                     status: :bad_request
+        render json: {
+	        success: false, 
+	        message: "Could not create message"
+	    },
+	    status: :bad_request
     end
   end
 
@@ -31,7 +31,7 @@ class WebsitesController < ApplicationController
                 not_visited: @website.pages.not_visited.count,
             }
         }
-    else            
+    else
         render json: { success: false, message: "There was an error retrieving the batch." }
     end
   end
@@ -44,6 +44,6 @@ class WebsitesController < ApplicationController
 
     def find_website
         @website = Website.find(params[:id])
-    end    
+    end
 
 end

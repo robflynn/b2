@@ -10,6 +10,15 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# Ruby's STDLIB URI implementation sucks
+gem 'addressable'
+
+# Additional parsing
+gem 'nokogiri'
+
+# Domain parsing
+gem 'public_suffix'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 
