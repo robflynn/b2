@@ -22,6 +22,7 @@ class Website < ApplicationRecord
     enum status: [:uncrawled, :crawling, :crawled, :processing, :processed]    
 
     has_many :pages
+    has_many :filters, class_name: 'PageFilter'
 
     validates_uniqueness_of :name, :url
 
@@ -34,4 +35,12 @@ class Website < ApplicationRecord
 
         self.pages.where(id: ids)
     end    
+
+    def filters_url?(url)
+        filters_regexp.match?(url)
+    end
+
+    def filters_regexp
+        @filters_regexp ||= Regexp.union(filters.map(&:to_regex))        
+    end
 end

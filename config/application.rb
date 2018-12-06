@@ -32,4 +32,6 @@ module Brooklyn
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
   end
+
+  $mcache = Memcached.new("localhost:11211")  
 end

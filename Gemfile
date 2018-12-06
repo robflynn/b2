@@ -19,6 +19,8 @@ gem 'nokogiri'
 # Domain parsing
 gem 'public_suffix'
 
+gem 'memcached'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 
