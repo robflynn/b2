@@ -57,7 +57,7 @@ class WebsiteService
 					add_to_queue(website: website, url: href, referrer: page)
 				end
 
-                # page.crawled!
+                page.crawled!
             end
 
             return page
@@ -67,7 +67,7 @@ class WebsiteService
 
         # Add a page to the queue, checking it against the Website's filte rules
         def add_to_queue(website:, url:, referrer:)
-        	# Sanitize the URL            
+        	# Sanitize the URL
             s = build_page(website: website, url: url, referrer: referrer)
         end
 
@@ -91,7 +91,7 @@ class WebsiteService
 
             website_host = Addressable::URI.parse(website.url).host
 
-            # Only allow children of the origin domain 
+            # Only allow children of the origin domain
             return unless uri.host.end_with? website_host
 
             puts "woozle3"
@@ -99,7 +99,7 @@ class WebsiteService
              return unless crawlable_extension?(uri)
 
              # We don't wanna store fragments, so strip those off
-             uri.fragment = nil             
+             uri.fragment = nil
 
              # Reconstruct our URL, post-modifications
              url = uri.to_s
@@ -107,7 +107,7 @@ class WebsiteService
              # Build our page
              page = website.pages.build
              page.url = url
-             page.referrer = referrer.url             
+             page.referrer = referrer.url
 
              # We only want to store unique pages
              return unless unique_page?(page)
@@ -158,7 +158,7 @@ class WebsiteService
             rescue Memcached::NotFound => e
                 return Page.exists?(digest: key)
             end
-        end        
+        end
 
     end
 end

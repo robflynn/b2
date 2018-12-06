@@ -12,7 +12,7 @@ class WebsitesController < ApplicationController
         render json: website
     else
         render json: {
-	        success: false, 
+	        success: false,
 	        message: "Could not create message"
 	    },
 	    status: :bad_request
@@ -23,6 +23,10 @@ class WebsitesController < ApplicationController
     batch = WebsiteService.get_page_batch(website: @website, params: params)
 
     if batch
+
+    	# Claim the batch
+    	batch.map(&:crawling!)
+
         render json: {
             pages: batch,
             stats: {
