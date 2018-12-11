@@ -46,6 +46,8 @@ development:
 #
 production:
   <<: *default
-  database: brooklyn_production
-  username: brooklyn
-  password: <%= ENV['BROOKLYN_DATABASE_PASSWORD'] %>
+  database: accessibility_spider_dev
+  username: rob
+  password: pickles
+  host: localhost
+
