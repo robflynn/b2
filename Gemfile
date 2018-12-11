@@ -36,4 +36,10 @@ group :development do
   # Process launcher
   gem 'foreman'
 
+	# Deployment
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
 end
