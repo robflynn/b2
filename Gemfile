@@ -5,6 +5,7 @@ ruby '2.5.3'
 
 gem 'rails', '~> 5.2.1', '>= 5.2.1.1'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
+gem 'pg'
 gem 'puma', '~> 3.11'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -27,6 +28,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'rb-readline'
 
   # Database annotations
   gem 'annotate'

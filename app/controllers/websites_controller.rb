@@ -1,5 +1,5 @@
 class WebsitesController < ApplicationController
-    before_action :find_website, only: [:queue, :update_page]
+  before_action :find_website, only: [:queue, :update_page]
 
   def index
     render json: Website.all
@@ -9,13 +9,13 @@ class WebsitesController < ApplicationController
     website = WebsiteService.create(params: params)
 
     if website
-        render json: website
+      render json: website
     else
-        render json: {
-	        success: false,
-	        message: "Could not create message"
-	    },
-	    status: :bad_request
+      render json: {
+        success: false,
+        message: "Could not create message"
+      },
+             status: :bad_request
     end
   end
 
@@ -24,19 +24,19 @@ class WebsitesController < ApplicationController
 
     if batch
 
-    	# Claim the batch
-    	batch.map(&:crawling!)
+      # Claim the batch
+      batch.map(&:crawling!)
 
-        render json: {
-            pages: batch,
-            stats: {
-                pages: @website.pages.count,
-                visited: @website.pages.visited.count,
-                not_visited: @website.pages.not_visited.count,
-            }
+      render json: {
+        pages: batch,
+        stats: {
+          pages: @website.pages.count,
+          visited: @website.pages.visited.count,
+          not_visited: @website.pages.not_visited.count,
         }
+      }
     else
-        render json: { success: false, message: "There was an error retrieving the batch." }
+      render json: { success: false, message: "There was an error retrieving the batch." }
     end
   end
 
@@ -46,8 +46,7 @@ class WebsitesController < ApplicationController
 
     private
 
-    def find_website
-        @website = Website.find(params[:id])
-    end
-
+  def find_website
+    @website = Website.find(params[:id])
+  end
 end

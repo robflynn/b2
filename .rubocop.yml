@@ -43,7 +43,7 @@ Style/EachForSimpleLoop:
 # so we're not going to use those.
 Layout/IndentationWidth:
   Enabled: true
-  Width: 4
+  Width: 2
 
 # Use consistent indentation within blocks
 Layout/IndentationConsistency:

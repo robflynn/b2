@@ -18,29 +18,29 @@
 #
 
 class Website < ApplicationRecord
-    # Define our statuses
-    enum status: [:uncrawled, :crawling, :crawled, :processing, :processed]    
+  # Define our statuses
+  enum status: [:uncrawled, :crawling, :crawled, :processing, :processed]
 
-    has_many :pages
-    has_many :filters, class_name: 'PageFilter'
+  has_many :pages
+  has_many :filters, class_name: 'PageFilter'
 
-    validates_uniqueness_of :name, :url
+  validates_uniqueness_of :name, :url
 
-    def random_uncrawled_pages(page_count = 10)
-        sql = "SELECT id FROM (SELECT id FROM pages WHERE status=0 AND website_id=#{self.id} ORDER BY RAND() LIMIT #{page_count}) t"
+  def random_uncrawled_pages(page_count = 10)
+    sql = "SELECT id FROM (SELECT id FROM pages WHERE status=0 AND website_id=#{self.id} ORDER BY RANDOM() LIMIT #{page_count}) t"
 
-        ids = ActiveRecord::Base.connection.select_all(sql)
+    ids = ActiveRecord::Base.connection.select_all(sql)
 
-        ids = ids.map { |i| i["id"] }
+    ids = ids.map { |i| i["id"] }
 
-        self.pages.where(id: ids)
-    end    
+    self.pages.where(id: ids)
+  end
 
-    def filters_url?(url)
-        filters_regexp.match?(url)
-    end
+  def filters_url?(url)
+    filters_regexp.match?(url)
+  end
 
-    def filters_regexp
-        @filters_regexp ||= Regexp.union(filters.map(&:to_regex))        
-    end
+  def filters_regexp
+    @filters_regexp ||= Regexp.union(filters.map(&:to_regex))
+  end
 end
