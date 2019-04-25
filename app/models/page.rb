@@ -22,7 +22,16 @@
 #
 
 class Page < ApplicationRecord
-  enum status: [:uncrawled, :crawling, :crawled, :processing, :processed, :crawl_error, :unknown_type_error, :skipped]
+  enum status: [
+    :uncrawled,
+    :crawling,
+    :crawled,
+    :processing,
+    :processed,
+    :crawl_error,
+    :unknown_type_error,
+    :skipped
+  ]
 
   scope :visited,  -> { where(status: [:skipped, :crawl_error, :crawled]) }
   scope :not_visited, -> { where(status: [:uncrawled, :crawling]) }
