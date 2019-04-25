@@ -2,15 +2,13 @@
 #
 # Table name: websites
 #
-#  id           :integer          not null, primary key
-#  name         :string(255)      not null
-#  url          :string(255)      not null
-#  status       :integer          default("uncrawled"), not null
+#  id           :bigint(8)        not null, primary key
+#  domain       :string
+#  name         :string           not null
+#  url          :string           not null
+#  status       :integer          default("uncrawled")
 #  crawled_at   :datetime
 #  processed_at :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  domain       :string(255)
 #
 # Indexes
 #
@@ -23,6 +21,7 @@ class Website < ApplicationRecord
 
   has_many :pages
   has_many :filters, class_name: 'PageFilter'
+  has_many :videos, through: :pages
 
   validates_uniqueness_of :name, :url
 

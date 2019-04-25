@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_18_140429) do
+ActiveRecord::Schema.define(version: 2019_04_25_203359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 2019_04_18_140429) do
     t.string "digest", limit: 64
     t.index ["digest"], name: "index_pages_on_digest"
     t.index ["website_id", "status"], name: "index_pages_on_website_id_and_status"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.bigint "page_id"
+    t.text "url"
+    t.string "embed_type"
+    t.text "fragment"
+    t.string "properties", limit: 1024
+    t.boolean "captioned", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["embed_type"], name: "index_videos_on_embed_type"
+    t.index ["page_id"], name: "index_videos_on_page_id"
   end
 
   create_table "websites", force: :cascade do |t|

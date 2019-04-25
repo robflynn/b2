@@ -4,9 +4,9 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  website_id  :bigint(8)
-#  filter      :string(255)      not null
-#  filter_type :string(255)      default("regex"), not null
-#  note        :string(255)
+#  filter      :string           not null
+#  filter_type :string           default("regex")
+#  note        :string
 #
 # Indexes
 #

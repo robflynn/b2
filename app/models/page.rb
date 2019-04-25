@@ -2,19 +2,17 @@
 #
 # Table name: pages
 #
-#  id            :integer          not null, primary key
+#  id            :bigint(8)        not null, primary key
 #  website_id    :integer
 #  url           :string(4096)
 #  title         :string(1024)
-#  content_type  :string(255)
-#  content       :text(4294967295)
+#  content_type  :string
+#  content       :text
 #  response_code :integer
 #  referrer      :string(4096)
-#  status        :integer          default("uncrawled"), not null
+#  status        :integer          default("uncrawled")
 #  visited_at    :datetime
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  message       :string(255)
+#  message       :string
 #  digest        :string(64)
 #
 # Indexes
@@ -30,6 +28,7 @@ class Page < ApplicationRecord
   scope :not_visited, -> { where(status: [:uncrawled, :crawling]) }
 
   belongs_to :website
+  has_many :videos
 
   #
   # Generate a SHA1 digest whenever the URL is changed
