@@ -3,8 +3,8 @@ module VideoService
     def find_videos(html)
       videos = []
 
-      video_processors.each do |processor|
-        chunks = processor.parse(html)
+      video_parsers.each do |parser|
+        chunks = parser.parse(html)
 
         chunks.each do |chunk|
           video = Video.new
@@ -23,9 +23,10 @@ module VideoService
 
     private
 
-    def video_processors
+    def video_parsers
       [
-        HTML5VideoParser
+        HTML5VideoParser,
+        YoutubeVideoParser
       ]
     end
   end

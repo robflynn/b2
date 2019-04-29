@@ -10,7 +10,7 @@ module PageService
 
     private
 
-    def find_videos(page: page)
+    def find_videos(page:)
       # Abort if there's no content type
       return [] if page.content_type.nil?
 
@@ -20,10 +20,6 @@ module PageService
       content = page.content
 
       videos = VideoService.find_videos(content)
-    end
-
-    def video_processors
-      []
     end
   end
 end
