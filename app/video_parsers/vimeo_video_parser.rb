@@ -1,4 +1,4 @@
-class YoutubeVideoParser < VideoParser
+class VimeoVideoParser < VideoParser
   def self.parse(html)
     videos = []
 
@@ -9,17 +9,17 @@ class YoutubeVideoParser < VideoParser
     iframes.each do |iframe|
       src = iframe.attr('src')
 
-      if /youtube.com\/embed.*?/ =~ src
+      if /player.vimeo.com/ =~ src
 
         parsed_uri = URI(src)
         parsed_uri.query = nil
 
         video = {
           src: parsed_uri.to_s,
-          type: 'youtube',
+          type: 'vimeo',
           fragment: iframe.to_html,
-          properties: '',
-          tracks: false
+          tracks: false,
+          properties: ''
         }
 
         videos << video

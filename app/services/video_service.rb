@@ -26,7 +26,8 @@ module VideoService
     def video_parsers
       [
         HTML5VideoParser,
-        YoutubeVideoParser
+        YoutubeVideoParser,
+        VimeoVideoParser
       ]
     end
   end
