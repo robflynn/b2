@@ -13,7 +13,15 @@ class WebsiteService
 
   class << self
     def get_page_batch(website:, params:)
-      return website.random_uncrawled_pages
+      pages = website.random_uncrawled_pages
+
+      # Reject any pages that we don't need to parse
+      skipped_pages = pages.select { |page| website.filters_url?(page.url) }
+      skipped_pages.map(&:skipped!)
+
+      pages = pages - skipped_pages
+
+      return pages
     end
 
     def create(params:)
@@ -96,7 +104,6 @@ class WebsiteService
       # Only allow children of the origin domain
       return unless uri.host.end_with? website_host
 
-      puts "woozle3"
       # Don't crawl the following black listed extensions
       return unless crawlable_extension?(uri)
 
