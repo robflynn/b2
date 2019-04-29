@@ -15,10 +15,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: webster
 
+
 development:
   <<: *default
   database: webster
-  host: localhost
+  host: <%= ENV.fetch("DEV_DB_IP") { "localhost" } %>
   password: 'i like crawling things'
 
 # As with config/secrets.yml, you never want to store sensitive information,
