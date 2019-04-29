@@ -22,6 +22,13 @@
 #
 
 class Page < ApplicationRecord
+  # Helper scopes for testing/debugging purposes
+  scope :containing_html5_video, -> { where("content ILIKE '%<video%'") }
+  scope :containing_vimeo, -> { where("content ~* '<iframe.*?src.*?player.vimeo.com.*?>.*?</iframe>'") }
+  scope :containing_youtube, -> { where("content ~* '<iframe.*?src.*?youtube.com/embed.*?>.*?</iframe>'") }
+  scope :containing_jwplayer, -> { where("content ~* 'jwplayer\\('") }
+
+
   enum status: [
     :uncrawled,
     :crawling,

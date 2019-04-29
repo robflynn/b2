@@ -28,7 +28,7 @@ module VideoService
         HTML5VideoParser,
         YoutubeVideoParser,
         VimeoVideoParser,
-        JWVideoParser
+        JWPlayerVideoParser
       ]
     end
   end
