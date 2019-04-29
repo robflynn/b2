@@ -14,8 +14,7 @@ class WebsitesController < ApplicationController
       render json: {
         success: false,
         message: "Could not create message"
-      },
-             status: :bad_request
+      }, status: :bad_request
     end
   end
 
@@ -23,7 +22,6 @@ class WebsitesController < ApplicationController
     batch = WebsiteService.get_page_batch(website: @website, params: params)
 
     if batch
-
       # Claim the batch
       batch.map(&:crawling!)
 

@@ -15,4 +15,12 @@
 #
 
 class PageFilter < ApplicationRecord
+	enum filter_type: {
+		regex: 'regex',
+		literal: 'literal'
+  }
+
+  def to_regex
+    filter.to_regexp(literal: literal?)
+  end
 end

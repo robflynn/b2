@@ -28,7 +28,6 @@ class Page < ApplicationRecord
   scope :containing_youtube, -> { where("content ~* '<iframe.*?src.*?youtube.com/embed.*?>.*?</iframe>'") }
   scope :containing_jwplayer, -> { where("content ~* 'jwplayer\\('") }
 
-
   enum status: [
     :uncrawled,
     :crawling,

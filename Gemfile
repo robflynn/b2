@@ -22,6 +22,9 @@ gem 'public_suffix'
 
 gem 'memcached'
 
+# Conversion of strings to regex
+gem 'to_regexp'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 
