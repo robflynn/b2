@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-    resources :websites, only: [:index, :create] do
-        member do
-            post 'queue'
-            patch 'update_page'
-        end
+  get '/status/(:name)', to: 'dashboard#show', constraints: { name: /[^\/]+/ }
+
+  resources :websites, only: [:index, :create] do
+    member do
+      get 'get_stats'
+      get 'get_queue'
+
+      post 'queue'
+      patch 'update_page'
     end
+  end
 end

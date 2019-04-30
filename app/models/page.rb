@@ -14,6 +14,8 @@
 #  visited_at    :datetime
 #  message       :string
 #  digest        :string(64)
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 # Indexes
 #

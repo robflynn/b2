@@ -8,6 +8,14 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'pg'
 gem 'puma', '~> 3.11'
 
+# Use CoffeeScript for .coffee assets and views
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'turbolinks', '~> 5'
+gem 'jbuilder', '~> 2.5'
+gem 'therubyracer'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -48,4 +56,10 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
+
+  # Live reloading
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload'
+  gem 'rb-fsevent', require: false
 end

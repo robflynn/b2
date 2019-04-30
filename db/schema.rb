@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_203359) do
+ActiveRecord::Schema.define(version: 2019_04_30_211113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2019_04_25_203359) do
     t.datetime "visited_at"
     t.string "message"
     t.string "digest", limit: 64
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["digest"], name: "index_pages_on_digest"
     t.index ["website_id", "status"], name: "index_pages_on_website_id_and_status"
   end

@@ -42,4 +42,21 @@ class Website < ApplicationRecord
   def filters_regexp
     @filters_regexp ||= Regexp.union(filters.map(&:to_regex))
   end
+
+  def percent_crawled
+  	crawled_pages = total_pages_crawled
+  	total_pages = pages.count
+
+    percent = ((crawled_pages.to_f / total_pages) * 100.0).round(4)
+  end
+
+  def total_pages_crawled
+    checked_status = [:crawled, :skipped, :crawl_error]
+    pages.where(status: checked_status).count
+  end
+
+  def page_queue
+    queue = self.pages.where.not(status: :uncrawled).where('updated_at >= ?', 10.minute.ago)
+  end
+
 end

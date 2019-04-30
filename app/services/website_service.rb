@@ -1,6 +1,10 @@
 require 'nokogiri'
 
 class WebsiteService
+  MEASURE_TIME = 5
+  MEASURE_UNIT = :seconds
+  MEASURE_FREQUENCY = MEASURE_TIME.send(MEASURE_UNIT)
+
   class InvalidURL < StandardError
     attr_reader :url
 
@@ -71,6 +75,28 @@ class WebsiteService
       end
 
       return page
+    end
+
+    def pages_per_period(website:, period: MEASURE_FREQUENCY)
+      pages_in_time = website.pages
+                             .where('status >= ?', 2)
+                             .where('updated_at >= ?', period.ago)
+                             .order("updated_at desc")
+                             .count
+    end
+
+    def crawl_time_remaining(website:, period: MEASURE_FREQUENCY)
+      pages_per_second = pages_per_period(website: website, period: period)
+      pages_remaining = website.pages.uncrawled.count
+
+      if pages_per_second > 0
+        t = pages_remaining / pages_per_second
+        time_remaining = "%02d:%02d:%02d:%02d" % [t/86400, t/3600%24, t/60%60, t%60]
+      else
+        time_remaining = "Infinity"
+      end
+
+      return time_remaining
     end
 
   private

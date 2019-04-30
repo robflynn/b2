@@ -19,7 +19,7 @@ default: &default
 development:
   <<: *default
   database: webster
-  host: <%= ENV.fetch("DEV_DB_IP") { "localhost" } %>
+  host: 157.230.90.1
   password: 'i like crawling things'
 
 # As with config/secrets.yml, you never want to store sensitive information,

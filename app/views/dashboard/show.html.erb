@@ -1,0 +1,144 @@
+<h1><%= @website.url %></h1>
+
+<section class="progress">
+	<div class="progress-bar">
+		<div class="progress" data-progress="0" data-stat="progress"></div>
+	</div>
+</section>
+
+<section class="stats">
+	<table class="table table--centered-text table--full">
+		<thead>
+			<tr>
+				<th>%</th>
+				<th>Crawled</th>
+				<th>Total Pages</th>
+				<th>PPS</th>
+				<th>Time Remaining</th>
+			</tr>
+		</thead>
+
+		<tbody class="bordered">
+			<tr>
+				<td data-stat="percent">n/a</td>
+        <td data-stat="crawled_pages">n/a</td>
+        <td data-stat="total_pages">n/a</td>
+        <td data-stat="pages_per_second">n/a</td>
+        <td data-stat="time_remaining">n/a</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section class="page-queue">
+	<table class="table table--full table--left-text">
+		<thead>
+			<tr>
+				<th colspan="2" class="center">Current Page Queue</th>
+			</tr>
+			<tr>
+				<th>
+					URL
+				</th>
+				<th>
+					Status
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% if @queue.empty? %>
+				<tr>
+					<td colspan="2">
+						Loading crawl queue...
+					</td>
+				</tr>
+			<% end %>
+			<% @queue.each do |page| %>
+			<tr class="crawled">
+				<td>
+					<%= page.url %>
+				</td>
+				<td>
+					<%= page.status %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+
+  </table>
+</section>
+
+
+<script>
+  function $(selector) {
+    return document.querySelectorAll(selector)
+  }
+
+  function $$(selector) {
+    result = $(selector)
+
+    if (result.length >= 1) {
+      return $(selector)[0]
+    }
+
+    return undefined
+  }
+
+	document.addEventListener("DOMContentLoaded", function() {
+		initialize();
+	});
+
+	function initialize() {
+    update_stats();
+    update_queue();
+  }
+
+  function update_progress(progress) {
+    var $bar = $$(".progress-bar .progress")
+    $bar.dataset.progress = progress
+    $bar.style.width = progress + "%";
+  }
+
+  function website_base_url() {
+    return "/websites/<%= @website.id %>";
+  }
+
+  function update_queue() {
+    fetch(website_base_url() + "/get_queue")
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(data) {
+
+      })
+      .then(function() {
+        setTimeout(update_queue, 5000)
+      })
+  }
+
+	function update_stats() {
+    fetch("/websites/<%= @website.id %>/get_stats")
+      .then(function(response) {
+        return response.json()
+      })
+      .then(function(data) {
+        for (field in data) {
+          let fieldSelector = "[data-stat=\"" + field + "\"]"
+          let entity = $$(fieldSelector)
+
+          if (entity) {
+            entity.innerHTML = data[field]
+          }
+
+          // treat the progress bar differently
+          if (field == 'percent') {
+            update_progress(data[field])
+          }
+        }
+      })
+    .then(function() {
+      setTimeout(update_stats, 5000)
+    })
+	}
+</script>
