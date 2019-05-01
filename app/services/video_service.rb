@@ -9,7 +9,7 @@ module VideoService
         chunks.each do |chunk|
           video = Video.new
           video.url =  chunk[:src]
-          video.embed_type = chunk[:src]
+          video.embed_type = chunk[:type]
           video.fragment = chunk[:fragment]
           video.captioned = chunk[:tracks]
           video.properties = chunk[:properties]
@@ -28,7 +28,8 @@ module VideoService
         HTML5VideoParser,
         YoutubeVideoParser,
         VimeoVideoParser,
-        JWPlayerVideoParser
+        JWPlayerVideoParser,
+        OpenCoursewareVideoParser
       ]
     end
   end
