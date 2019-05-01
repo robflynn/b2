@@ -25,7 +25,7 @@ class WebsiteService
       # If the user supplied a filter, select those items first
       if filter
         # We'll limit each subquery to make things faster
-        pages = website.pages.with_url_containing(filter).limit(batch_size)
+        pages = website.pages.with_url_containing(filter).random.limit(batch_size)
 
         # If we didn't have enough filter queries to fill out our batch size
         # finish populating it with random pages
