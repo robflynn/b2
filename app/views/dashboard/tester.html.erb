@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Status</th>
         <th>URL</th>
       </tr>
     </thead>
@@ -12,12 +13,13 @@
         <% @pages.each do |p| %>
         <tr>
           <td><%= p.id %></td>
+          <td><%= p.status %></td>
           <td><%= p.url %></td>
         </tr>
         <% end %>
       <% else%>
         <tr>
-          <td colspan="2">
+          <td colspan="3">
             No uncrawled pages in the queue
           </td>
         </tr>
