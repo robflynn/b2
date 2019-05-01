@@ -47,6 +47,6 @@ class Website < ApplicationRecord
 
   def apply_filters!
     ids = pages.uncrawled.select(:id,:url).select { |url| self.filters_url? url.url }.map(&:id)
-    pages.where(id: ids).update_all(status: :skipped)
+    pages.where(id: ids).update_all(status: :skipped, updated_at: DateTime.now)
   end
 end
