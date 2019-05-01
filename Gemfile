@@ -34,6 +34,8 @@ gem 'to_regexp'
 
 gem 'active_record_union'
 
+gem 'baby_squeel'
+
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 

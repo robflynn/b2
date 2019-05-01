@@ -53,6 +53,10 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
     ast (2.4.0)
+    baby_squeel (1.3.1)
+      activerecord (>= 4.2.0)
+      join_dependency (~> 0.1.2)
+      polyamorous (~> 1.3)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -118,6 +122,8 @@ GEM
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    join_dependency (0.1.4)
+      activerecord (>= 4.2.0)
     libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -153,6 +159,8 @@ GEM
     parser (2.5.3.0)
       ast (~> 2.4.0)
     pg (0.21.0)
+    polyamorous (1.3.3)
+      activerecord (>= 3.0)
     powerpack (0.1.2)
     pry (0.12.2)
       coderay (~> 1.1.0)
@@ -258,6 +266,7 @@ DEPENDENCIES
   active_record_union
   addressable
   annotate
+  baby_squeel
   bootsnap (>= 1.1.0)
   capistrano
   capistrano-bundler

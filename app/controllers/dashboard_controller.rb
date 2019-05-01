@@ -13,7 +13,7 @@ class DashboardController < ApplicationController
   end
 
   def tester
-    @pages = WebsiteService.get_page_batch(website: @website, params: params)
+    @pages = WebsiteService.pages_being_crawled(website: @website).limit(25)
   end
 
   private
