@@ -24,7 +24,7 @@ class WebsitesController < APIController
 
     if batch
       # Claim the batch
-      batch.update_all(status: :crawling)
+      batch.update_all(status: :crawling, updated_at: DateTime.now)
 
       render json: {
         pages: batch,
