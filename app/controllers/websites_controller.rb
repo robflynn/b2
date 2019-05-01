@@ -44,7 +44,7 @@ class WebsitesController < APIController
   end
 
   def get_queue
-    @queue = @website.page_queue.limit(10)
+    @queue = WebsiteService.pages_being_crawled(website: @website).limit(25)
 
     render json: @queue
   end

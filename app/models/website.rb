@@ -45,10 +45,6 @@ class Website < ApplicationRecord
     pages.where(status: checked_status).count
   end
 
-  def page_queue
-    queue = self.pages.where.not(status: :uncrawled).where('updated_at >= ?', 10.minute.ago)
-  end
-
   def apply_filters!
     ids = pages.uncrawled.select(:id,:url).select { |url| self.filters_url? url.url }.map(&:id)
     pages.where(id: ids).update_all(status: :skipped)

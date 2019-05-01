@@ -1,11 +1,11 @@
 class DashboardController < ApplicationController
-  PAGE_QUEUE_LIMIT = 25
+  PAGE_QUEUE_LIMIT = 50
 
   before_action :find_website
 
   def show
     # Get the pages currently being crawled or recently crawled
-    @queue = @website.page_queue.order('updated_at desc, status').limit(PAGE_QUEUE_LIMIT)
+    @queue = WebsiteService.pages_being_crawled(website: @website).limit(PAGE_QUEUE_LIMIT)
   end
 
   def uncrawled

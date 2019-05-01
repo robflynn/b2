@@ -40,9 +40,6 @@
 				<th>
 					URL
 				</th>
-				<th>
-					Status
-				</th>
 			</tr>
 		</thead>
 
@@ -58,9 +55,6 @@
 			<tr class="crawled">
 				<td>
 					<%= page.url %>
-				</td>
-				<td>
-					<%= page.status %>
 				</td>
 			</tr>
 			<% end %>
@@ -104,16 +98,35 @@
     return "/websites/<%= @website.id %>";
   }
 
+  function render_queue(data) {
+    let body = document.createElement("tbody");
+
+    for (i in data) {
+      let page = data[i];
+
+      var tr = document.createElement("tr")
+      var td = document.createElement("td")
+      td.innerHTML = page.url
+      tr.appendChild(td)
+      body.appendChild(tr)
+    }
+
+    var queueTable = $$(".page-queue table");
+    var oldQueueBody = $$(".page-queue table tbody");
+
+    queueTable.replaceChild(body, oldQueueBody);
+  }
+
   function update_queue() {
     fetch(website_base_url() + "/get_queue")
       .then(function(response) {
         return response.json()
       })
       .then(function(data) {
-
+        render_queue(data)
       })
       .then(function() {
-        setTimeout(update_queue, 5000)
+        setTimeout(update_queue, 1000)
       })
   }
 
