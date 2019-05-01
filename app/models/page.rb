@@ -41,8 +41,10 @@ class Page < ApplicationRecord
     :skipped
   ]
 
+  scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
   scope :visited,  -> { where(status: [:skipped, :crawl_error, :crawled]) }
   scope :not_visited, -> { where(status: [:uncrawled, :crawling]) }
+  scope :with_url_containing, -> (query) { where("url LIKE ?", "%#{query}%") }
 
   belongs_to :website
   has_many :videos

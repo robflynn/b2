@@ -4,6 +4,7 @@ class WebsiteService
   MEASURE_TIME = 5
   MEASURE_UNIT = :seconds
   MEASURE_FREQUENCY = MEASURE_TIME.send(MEASURE_UNIT)
+  DEFAULT_BATCH_SIZE = 10
 
   class InvalidURL < StandardError
     attr_reader :url
@@ -17,13 +18,28 @@ class WebsiteService
 
   class << self
     def get_page_batch(website:, params:)
-      pages = website.random_uncrawled_pages
 
-      # Reject any pages that we don't need to parse
-      skipped_pages = pages.select { |page| website.filters_url?(page.url) }
-      skipped_pages.map(&:skipped!)
+      batch_size = (params[:batch_size] || DEFAULT_BATCH_SIZE).to_i
+      filter = params[:matching] || nil
 
-      pages = pages - skipped_pages
+      # If the user supplied a filter, select those items first
+      if filter
+        # We'll limit each subquery to make things faster
+        pages = website.pages.with_url_containing(filter).limit(batch_size)
+
+        # If we didn't have enough filter queries to fill out our batch size
+        # finish populating it with random pages
+        if pages.count < batch_size
+          difference = batch_size - pages.size
+
+          pages.union(website.pages.random_uncrawled_pages.limit(difference))
+        end
+      else
+        # Othewise we'll just grab the random pages
+        pages = website.pages.random.uncrawled
+      end
+
+      pages = pages.limit(batch_size)
 
       return pages
     end

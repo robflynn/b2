@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.3'
 
 gem 'rails', '~> 5.2.1', '>= 5.2.1.1'
-gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'pg'
 gem 'puma', '~> 3.11'
 
@@ -32,6 +31,8 @@ gem 'memcached'
 
 # Conversion of strings to regex
 gem 'to_regexp'
+
+gem 'active_record_union'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

@@ -25,16 +25,6 @@ class Website < ApplicationRecord
 
   validates_uniqueness_of :name, :url
 
-  def random_uncrawled_pages(page_count = 10)
-    sql = "SELECT id FROM (SELECT id FROM pages WHERE status=0 AND website_id=#{self.id} ORDER BY RANDOM() LIMIT #{page_count}) t"
-
-    ids = ActiveRecord::Base.connection.select_all(sql)
-
-    ids = ids.map { |i| i["id"] }
-
-    self.pages.where(id: ids)
-  end
-
   def filters_url?(url)
     filters_regexp.match?(url)
   end
@@ -59,4 +49,8 @@ class Website < ApplicationRecord
     queue = self.pages.where.not(status: :uncrawled).where('updated_at >= ?', 10.minute.ago)
   end
 
+  def apply_filters!
+    ids = pages.uncrawled.select(:id,:url).select { |url| self.filters_url? url.url }.map(&:id)
+    pages.where(id: ids).update_all(status: :skipped)
+  end
 end
