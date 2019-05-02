@@ -45,7 +45,7 @@ class WebsitesController < APIController
   end
 
   def get_queue
-    @queue = WebsiteService.pages_being_crawled(website: @website)
+    @queue = WebsiteService.pages_being_crawled(website: @website).select(:id, :url, :status)
 
     render json: @queue
   end

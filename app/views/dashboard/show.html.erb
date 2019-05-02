@@ -44,20 +44,11 @@
 		</thead>
 
 		<tbody>
-			<% if @queue.empty? %>
-				<tr>
-					<td colspan="2">
-						Loading crawl queue...
-					</td>
-				</tr>
-			<% end %>
-			<% @queue.each do |page| %>
-			<tr class="crawled">
-				<td>
-					<%= page.url %>
-				</td>
-			</tr>
-			<% end %>
+      <tr>
+        <td colspan="2">
+          Loading crawl queue...
+        </td>
+      </tr>
 		</tbody>
 
   </table>
@@ -107,6 +98,8 @@
       var tr = document.createElement("tr")
       var td = document.createElement("td")
       td.innerHTML = page.url
+      td.classList.add("page")
+      td.classList.add(page.status)
       tr.appendChild(td)
       body.appendChild(tr)
     }

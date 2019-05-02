@@ -133,3 +133,16 @@ section.stats {
 .center {
 	text-align: center !important;
 }
+
+section.page-queue {
+  .page {
+    &.skipped {
+      color: #aaa;
+      text-decoration: line-through;
+    }
+
+    &.crawl_error {
+      color: #a00;
+    }
+  }
+}

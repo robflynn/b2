@@ -5,6 +5,7 @@ class WebsiteService
   MEASURE_UNIT = :seconds
   MEASURE_FREQUENCY = MEASURE_TIME.send(MEASURE_UNIT)
   DEFAULT_BATCH_SIZE = 10
+  PAGE_CRAWLED_PERIOD = 30.seconds
 
   class InvalidURL < StandardError
     attr_reader :url
@@ -116,7 +117,7 @@ class WebsiteService
     end
 
     def pages_being_crawled(website:)
-      website.pages.where.not(status: :uncrawled).where(updated_at: 60.minutes.ago..Time.now).order(:id)
+      website.pages.where.not(status: :uncrawled).where(updated_at: PAGE_CRAWLED_PERIOD.ago..Time.now).order(:id)
     end
 
   private
