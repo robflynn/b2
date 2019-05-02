@@ -63,7 +63,8 @@ class WebsitesController < APIController
       pages_per_second: pages_per_second.round(2),
       time_remaining: WebsiteService.crawl_time_remaining(website: @website),
       crawl_status: pages_per_second == 0 ? "stopped" : "crawling",
-      num_videos: @website.videos.count
+      num_videos: @website.videos.count,
+      jobs: Delayed::Job.count
     }
 
     render json: @stats
