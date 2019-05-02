@@ -20,6 +20,13 @@ class DashboardController < ApplicationController
     @videos = @website.videos.includes(:page_for_delegation)
   end
 
+  def export_csv
+    csv = VideoService.get_csv(website: @website)
+    filename = "#{@website.name}_videos_export_#{Time.now.to_i}.csv"
+
+    send_data csv, type: "text/csv; charset=utf-8; header=present", filename: filename
+  end
+
   private
 
   def find_website

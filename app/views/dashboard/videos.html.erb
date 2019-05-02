@@ -1,5 +1,7 @@
 <nav>
   <%= link_to '< Back to Dashboard', status_path(name: @website.name), class: "button" %>
+
+  <button id="download-csv-button" class="button">Download CSV</button>
 </nav>
 
 <section class="videos">
@@ -9,7 +11,7 @@
         <th>id</th>
         <th>pid</th>
         <th>page url</th>
-        <th>video type</th>
+        <th>type</th>
         <th>video source</th>
         <th>properties</th>
         <th>captioned?</th>
@@ -21,7 +23,7 @@
       <tr>
         <td><%= vid.id %></td>
         <td><%= vid.page_id %></td>
-        <td><%= vid.page_url %></td>
+        <td><%= link_to(vid.page_url.truncate(100), vid.page_url) %></td>
         <td><%= vid.embed_type %></td>
         <td><%= link_to(vid.url, vid.url, target: "_blank") %></td>
         <td><%= vid.properties %></td>
@@ -31,3 +33,25 @@
     </tbody>
   </table>
 </section>
+
+<iframe id="csv_download_region" aria-hidden="true" style="display: none;"></iframe>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		initialize();
+	});
+
+	function initialize() {
+    let btn = $$('#download-csv-button');
+
+    if (btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault()
+
+        var url = '<%= videos_export_csv_path(@website.name) %>'
+
+        $$('#csv_download_region').src = url
+      });
+    }
+  }
+</script>

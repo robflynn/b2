@@ -59,20 +59,6 @@
 </section>
 
 <script>
-  function $(selector) {
-    return document.querySelectorAll(selector)
-  }
-
-  function $$(selector) {
-    result = $(selector)
-
-    if (result.length >= 1) {
-      return $(selector)[0]
-    }
-
-    return undefined
-  }
-
 	document.addEventListener("DOMContentLoaded", function() {
 		initialize();
 	});
@@ -145,6 +131,14 @@
 
           if (entity) {
             entity.innerHTML = data[field]
+          }
+
+          if (field == 'num_videos') {
+            let anchor = document.createElement("a")
+            anchor.href = '<%= videos_path(name: @website.name) %>'
+            anchor.innerHTML = data[field]
+            entity.innerHTML = '';
+            entity.appendChild(anchor)
           }
 
           // treat the progress bar differently

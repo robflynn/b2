@@ -14,3 +14,17 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function $(selector) {
+  return document.querySelectorAll(selector)
+}
+
+function $$(selector) {
+  result = $(selector)
+
+  if (result.length >= 1) {
+    return $(selector)[0]
+  }
+
+  return undefined
+}

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/status/(:name)/uncrawled', to: 'dashboard#uncrawled', constraints: { name: /[^\/]+/ }
   get '/status/(:name)/tester', to: 'dashboard#tester', constraints: { name: /[^\/]+/ }
   get '/status/(:name)/videos', to: 'dashboard#videos', constraints: { name: /[^\/]+/ }, as: :videos
+  get '/status/(:name)/videos/export/csv', to: 'dashboard#export_csv', constraints: { name: /[^\/]+/ }, as: :videos_export_csv
 
   resources :websites, only: [:index, :create] do
     member do
