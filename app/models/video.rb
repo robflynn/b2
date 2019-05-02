@@ -2,8 +2,8 @@
 #
 # Table name: videos
 #
-#  id         :bigint(8)        not null, primary key
-#  page_id    :bigint(8)
+#  id         :bigint           not null, primary key
+#  page_id    :bigint
 #  url        :text
 #  embed_type :string
 #  fragment   :text
@@ -11,6 +11,7 @@
 #  captioned  :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  view_count :integer
 #
 # Indexes
 #

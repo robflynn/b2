@@ -2,8 +2,8 @@
 #
 # Table name: page_filters
 #
-#  id          :bigint(8)        not null, primary key
-#  website_id  :bigint(8)
+#  id          :bigint           not null, primary key
+#  website_id  :bigint
 #  filter      :string           not null
 #  filter_type :string           default("regex")
 #  note        :string

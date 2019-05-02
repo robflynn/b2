@@ -2,7 +2,7 @@
 #
 # Table name: pages
 #
-#  id            :bigint(8)        not null, primary key
+#  id            :bigint           not null, primary key
 #  website_id    :integer
 #  url           :string(4096)
 #  title         :string(1024)

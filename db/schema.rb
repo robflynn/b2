@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_184843) do
+ActiveRecord::Schema.define(version: 2019_05_02_202537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_184843) do
     t.boolean "captioned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "view_count"
     t.index ["embed_type"], name: "index_videos_on_embed_type"
     t.index ["page_id"], name: "index_videos_on_page_id"
   end
