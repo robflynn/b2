@@ -12,6 +12,7 @@
         <th>pid</th>
         <th>page url</th>
         <th>type</th>
+        <th>views</th>
         <th>video source</th>
         <th>properties</th>
         <th>captioned?</th>
@@ -25,7 +26,8 @@
         <td><%= vid.page_id %></td>
         <td><%= link_to(vid.page_url.truncate(100), vid.page_url) %></td>
         <td><%= vid.embed_type %></td>
-        <td><%= link_to(vid.url, vid.url, target: "_blank") %></td>
+        <td><%= vid.view_count %></td>
+        <td><%= link_to(vid.url.truncate(100), vid.url, target: "_blank") %></td>
         <td><%= vid.properties %></td>
         <td><%= vid.captioned? ? "yes" : "" %></td>
       </tr>

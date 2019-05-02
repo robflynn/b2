@@ -25,10 +25,10 @@ module VideoService
 
     def get_csv(website:)
       result = CSV.generate do |csv|
-        csv << ["id", "pid", "page title", "page url", "embed_type", "video_source", "properties", "tracks"]
+        csv << ["id", "pid", "page title", "page url", "embed_type", "view_count", "video_source", "properties", "tracks"]
 
         website.videos.order(page_id: :asc).each do |v|
-          csv << [v.id, v.page_id, v.page_title, v.page_url, v.embed_type, v.url, v.properties, v.captioned? ? true : ""]
+          csv << [v.id, v.page_id, v.page_title, v.page_url, v.embed_type, v.view_count, v.url, v.properties, v.captioned? ? true : ""]
         end
       end
 
