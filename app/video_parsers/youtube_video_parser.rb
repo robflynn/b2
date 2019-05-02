@@ -34,6 +34,8 @@ class YoutubeVideoParser < VideoParser
         videos << video
       end
     end
+
+    return videos
   end
 
   def self.parse_ytplayer_embed(html)
