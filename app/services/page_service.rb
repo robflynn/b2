@@ -4,11 +4,7 @@ module PageService
       # Load the page if it was passed as an integer
       page = Page.find(page) if page.class == Integer
 
-      #page.processing!
-
       videos = find_videos(page: page)
-
-      #page.processed!
     end
 
     private

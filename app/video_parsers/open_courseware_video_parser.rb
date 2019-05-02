@@ -51,7 +51,7 @@ class OpenCoursewareVideoParser < VideoParser
         # and use the old flash-based embed style. Lets
         # correct those just to make them easier for us to
         # spot check
-        media_url.gsub(/youtube.com\/v\/(.*?)/, 'youtube.com/watch?v=\1')
+        media_url.gsub!(/youtube.com\/v\/(.*?)/, 'youtube.com/watch?v=\1')
 
         video = {
           type: result["provider"],
