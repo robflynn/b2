@@ -2,7 +2,7 @@ class PageProcessingJob < ApplicationJob
   queue_as :default
 
   def perform(page)
-    page.processing
+    page.processing!
 
     videos = PageService.process(page: page)
 

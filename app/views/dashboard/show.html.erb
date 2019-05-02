@@ -39,7 +39,10 @@
 				<th colspan="2" class="center">Current Page Queue</th>
 			</tr>
 			<tr>
-				<th>
+        <th>
+          Status
+        </th>
+				<th width="100%">
 					URL
 				</th>
 			</tr>
@@ -96,6 +99,13 @@
       let page = data[i];
 
       var tr = document.createElement("tr")
+
+      var td = document.createElement("td")
+      td.innerHTML = page.status
+      td.classList.add("page")
+      td.classList.add(page.status)
+      tr.appendChild(td)
+
       var td = document.createElement("td")
       td.innerHTML = page.url
       td.classList.add("page")

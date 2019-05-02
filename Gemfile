@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
-gem 'rails', '~> 5.2.1', '>= 5.2.2.1'
+gem 'rails', '~> 5.2.3'
 gem 'pg'
 gem 'puma', '~> 3.11'
 
@@ -34,9 +34,14 @@ gem 'to_regexp'
 
 gem 'active_record_union'
 
-gem 'baby_squeel'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :development do
+  gem 'pry'
+  gem 'byebug'
+  gem 'pry-byebug'
   gem 'listen', '>= 3.0.5', '< 3.2'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
