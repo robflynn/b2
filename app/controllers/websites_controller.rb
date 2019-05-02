@@ -21,6 +21,7 @@ class WebsitesController < APIController
 
   def queue
     batch = WebsiteService.get_page_batch(website: @website, params: params)
+                          .select(:website_id, :id, :status, :url)
 
     if batch
       # Claim the batch

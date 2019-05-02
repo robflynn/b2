@@ -116,7 +116,7 @@ class WebsiteService
     end
 
     def pages_being_crawled(website:)
-      website.pages.where.not(status: :uncrawled).where(updated_at: 30.seconds.ago..Time.now).order(:id)
+      website.pages.where.not(status: :uncrawled).where(updated_at: 60.minutes.ago..Time.now).order(:id)
     end
 
   private
