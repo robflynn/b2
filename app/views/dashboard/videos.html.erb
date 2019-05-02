@@ -1,0 +1,33 @@
+<nav>
+  <%= link_to '< Back to Dashboard', status_path(name: @website.name), class: "button" %>
+</nav>
+
+<section class="videos">
+  <table class="table table--full table--left-text">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>pid</th>
+        <th>page url</th>
+        <th>video type</th>
+        <th>video source</th>
+        <th>properties</th>
+        <th>captioned?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @videos.each do |vid| %>
+      <tr>
+        <td><%= vid.id %></td>
+        <td><%= vid.page_id %></td>
+        <td><%= vid.page_url %></td>
+        <td><%= vid.embed_type %></td>
+        <td><%= link_to(vid.url, vid.url, target: "_blank") %></td>
+        <td><%= vid.properties %></td>
+        <td><%= vid.captioned? ? "yes" : "" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</section>

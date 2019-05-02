@@ -16,6 +16,10 @@ class DashboardController < ApplicationController
     @pages = WebsiteService.pages_being_crawled(website: @website).select(:id, :status, :url)
   end
 
+  def videos
+    @videos = @website.videos.includes(:page_for_delegation)
+  end
+
   private
 
   def find_website

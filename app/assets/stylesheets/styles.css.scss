@@ -1,9 +1,11 @@
 $purple: rgb(119, 51, 135);
+$blue: #3567b7;
 
 $colors: (
 	purple: $purple,
 	border: #888,
-	header: #444
+  header: #444,
+  button: $blue
 );
 
 $panel_padding: 10px;
@@ -50,6 +52,16 @@ h1 {
 	color: #222;
 	font-family: sans-serif;
 
+}
+
+nav {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+section {
+  margin-bottom: 10px;
 }
 
 section.stats {
@@ -144,5 +156,25 @@ section.page-queue {
     &.crawl_error {
       color: #a00;
     }
+  }
+}
+
+.button {
+  $topColor: color(button);
+  $bottomColor: darken($topColor, 10%);
+
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom, $topColor, $bottomColor);
+  padding: 10px;
+
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+
+  &:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    $topColor: lighten(color(button), 5%);
+    $bottomColor: darken($topColor, 10%);
+    background-image: linear-gradient(to bottom, $topColor, $bottomColor);
   }
 }

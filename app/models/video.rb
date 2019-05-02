@@ -20,6 +20,7 @@
 
 class Video < ApplicationRecord
   belongs_to :page
+  belongs_to :page_for_delegation, -> { select [:id, :url, :title] }, :class_name => "Page", foreign_key: :page_id
 
-  delegate :title, :url, to: :page, prefix: true
+  delegate :title, :url, to: :page_for_delegation, prefix: :page
 end
