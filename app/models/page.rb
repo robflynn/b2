@@ -33,6 +33,8 @@ class Page < ApplicationRecord
   scope :containing_jwplayer, -> { where("content ~* 'jwplayer\\('") }
   scope :containing_open_courseware, -> { regex("ocw_embed_chapter_media(.*?)").or Page.regex("ocw_embed_media(.*?)") }
 
+  scope :containing_video, -> { (containing_vimeo.or containing_youtube.or containing_html5_video.or containing_open_courseware.or containing_jwplayer) }
+
   enum status: [
     :uncrawled,
     :crawling,
