@@ -37,6 +37,8 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
+gem 'httparty'
+
 group :development do
   gem 'pry'
   gem 'byebug'
