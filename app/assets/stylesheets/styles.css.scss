@@ -1,12 +1,14 @@
 $purple: rgb(119, 51, 135);
 $blue: #3567b7;
+$green: rgb(65, 198, 149);
 
 $colors: (
 	purple: $purple,
 	border: #888,
   header: #444,
   button: $blue,
-  blue: $blue
+  blue: $blue,
+  green: $green
 );
 
 $panel_padding: 10px;
@@ -195,6 +197,12 @@ section.page-queue {
     background-image: linear-gradient(to bottom, $topColor, $bottomColor);
   }
 
+  &:disabled {
+    $disabledColor: #888;
+
+    background-image: linear-gradient(to bottom, $disabledColor, darken($disabledColor, 10%));
+  }
+
   & + .button {
     margin-left: 10px;
   }
@@ -205,5 +213,23 @@ section.page-queue {
   padding: 15px;
   border: solid 1px rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+}
 
+.nowrap {
+  white-space: nowrap;
+}
+
+.pagination {
+  a {
+    padding: 5px;
+    border: solid 1px #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+#download-csv-button {
+  &.generating {
+    background-image: linear-gradient(to bottom, color(green), darken(color(green), 10%)) !important;
+  }
 }

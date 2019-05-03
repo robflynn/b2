@@ -17,14 +17,17 @@ class DashboardController < ApplicationController
   end
 
   def videos
+    per_page = params[:per_page] || 250
+
     @videos = @website.videos
                       .processed
                       .includes(:page_for_delegation)
-                      .paginate(page: params[:page], per_page: 25)
+                      .order(updated_at: :desc)
+                      .paginate(page: params[:page], per_page: per_page)
   end
 
   def unprocessed_videos
-    per_page = params[:per_page] || 25
+    per_page = params[:per_page] || 250
 
     @videos = @website.videos
                       .pending

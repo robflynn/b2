@@ -18,6 +18,7 @@
         <th>video source</th>
         <th>properties</th>
         <th>captioned?</th>
+        <th>updated</th>
       </tr>
     </thead>
 
@@ -32,11 +33,14 @@
         <td><%= link_to(vid.url.truncate(100), vid.url, target: "_blank") %></td>
         <td><%= vid.properties %></td>
         <td><%= vid.captioned? ? "yes" : "" %></td>
+        <td class="nowrap"><%= vid.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </section>
+
+<%= will_paginate @videos %>
 
 <iframe id="csv_download_region" aria-hidden="true" style="display: none;"></iframe>
 
@@ -51,10 +55,19 @@
     if (btn) {
       btn.addEventListener('click', function(e) {
         e.preventDefault()
+        btn.classList.add("generating")
+        btn.innerHTML = "Generating..."
+        btn.setAttribute("disabled", true)
 
         var url = '<%= videos_export_csv_path(@website.name) %>'
 
         $$('#csv_download_region').src = url
+
+        setTimeout(function() {
+          btn.classList.remove("generating")
+          btn.removeAttribute("disabled");
+          btn.innerHTML = 'Download CSV'
+        }, 2500)
       });
     }
   }
