@@ -14,5 +14,12 @@ class PageProcessingJob < ApplicationJob
     end
 
     page.processed!
+
+    # Now loop through each video and fire up a processing job
+    page.videos.each do |video|
+      # We'll pass the parser to the job as a string for now
+      parser = VideoService.video_parser_for(video: video).to_s
+      VideoProcessingJob.perform_later parser, video
+    end
   end
 end
