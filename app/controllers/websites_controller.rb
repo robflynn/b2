@@ -70,7 +70,7 @@ class WebsitesController < APIController
       time_remaining: WebsiteService.crawl_time_remaining(website: @website),
       crawl_status: pages_per_second == 0 ? "stopped" : "crawling",
       num_videos: @website.videos.processed.count,
-      num_videos_pending: @website.videos.unprocessed.count,
+      num_videos_pending: @website.videos.pending.count,
       jobs: Delayed::Job.count
     }
 

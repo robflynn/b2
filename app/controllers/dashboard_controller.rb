@@ -21,6 +21,10 @@ class DashboardController < ApplicationController
     @queue = @website.videos.unprocessed.includes(:page_for_delegation)
   end
 
+  def filters
+    @filters = @website.filters
+  end
+
   def export_csv
     csv = VideoService.get_csv(website: @website)
     filename = "#{@website.name}_videos_export_#{Time.now.to_i}.csv"

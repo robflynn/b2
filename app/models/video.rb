@@ -34,6 +34,8 @@ class Video < ApplicationRecord
 
   delegate :title, :url, to: :page_for_delegation, prefix: :page
 
+  scope :pending, -> { where.not(status: [:processed, :error]) }
+
   def needs_processing?
     return false unless self.unprocessed?
 
