@@ -43,7 +43,9 @@ class WebsitesController < APIController
   def update_page
     page = WebsiteService.update_page(website: @website, params: params)
 
-    PageProcessingJob.perform_later(page)
+    if Page.where(id: page.id).containing_video.count > 0
+      PageProcessingJob.perform_later(page)
+    end
 
     render json: page
   end
