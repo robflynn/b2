@@ -33,7 +33,7 @@ class WebsiteService
         if pages.count < batch_size
           difference = batch_size - pages.size
 
-          pages.union(website.pages.random_uncrawled_pages.limit(difference))
+          pages.union(website.pages.random.uncrawled.limit(difference))
         end
       else
         # Othewise we'll just grab the random pages
@@ -41,6 +41,11 @@ class WebsiteService
       end
 
       pages = pages.limit(batch_size)
+
+      # Flag these pages as crawling
+      # NOTE: We need to do an additional query to set these by their ids. The
+      # internal order by random() is causing statuses to be set incorrectly.
+      pages = Page.where(id: pages.pluck(:id))
 
       return pages
     end
