@@ -41,7 +41,11 @@ class WebsitesController < APIController
   end
 
   def update_page
-    render json: WebsiteService.update_page(website: @website, params: params)
+    page = WebsiteService.update_page(website: @website, params: params)
+
+    PageProcessingJob.perform_later(page)
+
+    render json: page
   end
 
   def get_queue
@@ -63,7 +67,8 @@ class WebsitesController < APIController
       pages_per_second: pages_per_second.round(2),
       time_remaining: WebsiteService.crawl_time_remaining(website: @website),
       crawl_status: pages_per_second == 0 ? "stopped" : "crawling",
-      num_videos: @website.videos.count,
+      num_videos: @website.videos.processed.count,
+      num_videos_pending: @website.videos.unprocessed.count,
       jobs: Delayed::Job.count
     }
 

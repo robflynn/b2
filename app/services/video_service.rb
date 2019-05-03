@@ -35,6 +35,17 @@ module VideoService
       result
     end
 
+    def video_parser_for(video:)
+      case video.embed_type.to_sym
+      when :youtube
+        YoutubeVideoParser
+      when :vimeo
+        VimeoVideoParser
+      else
+        VideoParser
+      end
+    end
+
     private
 
     def video_parsers
