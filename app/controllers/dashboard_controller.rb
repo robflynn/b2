@@ -17,9 +17,23 @@ class DashboardController < ApplicationController
   end
 
   def videos
-    @videos = @website.videos.processed.includes(:page_for_delegation)
-    @queue = @website.videos.unprocessed.includes(:page_for_delegation)
+    @videos = @website.videos
+                      .processed
+                      .includes(:page_for_delegation)
+                      .paginate(page: params[:page], per_page: 25)
   end
+
+  def unprocessed_videos
+    per_page = params[:per_page] || 25
+
+    @videos = @website.videos
+                      .pending
+                      .includes(:page_for_delegation)
+                      .paginate(page: params[:page], per_page: per_page)
+
+    render :videos
+  end
+
 
   def filters
     @filters = @website.filters

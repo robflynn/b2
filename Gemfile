@@ -12,6 +12,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+
 gem 'therubyracer'
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -38,6 +39,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 gem 'httparty'
+
+gem 'will_paginate'
 
 group :development do
   gem 'pry'

@@ -4,5 +4,7 @@ class VideoParser
   end
 
   def self.process(video:)
+    video.processing!
+    video.processed!
   end
 end
