@@ -5,7 +5,7 @@ class WebsiteService
   MEASURE_UNIT = :seconds
   MEASURE_FREQUENCY = MEASURE_TIME.send(MEASURE_UNIT)
   DEFAULT_BATCH_SIZE = 10
-  PAGE_CRAWLED_PERIOD = 30.seconds
+  PAGE_CRAWLED_PERIOD = 15.seconds
 
   class InvalidURL < StandardError
     attr_reader :url
