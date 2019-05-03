@@ -25,7 +25,8 @@ class Video < ApplicationRecord
   enum status: [
     :unprocessed,
     :processing,
-    :processed
+    :processed,
+    :error
   ]
 
   belongs_to :page

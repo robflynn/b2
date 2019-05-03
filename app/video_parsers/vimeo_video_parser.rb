@@ -29,7 +29,7 @@ class VimeoVideoParser < VideoParser
     return videos
   end
 
-  # Perform additional processing on the video. 
+  # Perform additional processing on the video.
   def self.process(video:)
     # https://vimeo.com/api/v2/video/:video_id.json
     # https://player.vimeo.com/video/:video_id
@@ -39,33 +39,37 @@ class VimeoVideoParser < VideoParser
     # Grab the view count from this end point
     api_url = video.url.gsub(/player\.vimeo\.com(\/video\/\d+)/, 'vimeo.com/api/v2\1.json')
 
-    response = HTTParty.get(api_url)
-    response = JSON.parse(response.body)
+    begin
+      response = HTTParty.get(api_url)
+      response = JSON.parse(response.body)
 
-    views = response.first["stats_number_of_plays"].to_i
+      views = response.first["stats_number_of_plays"].to_i
 
-    video.view_count = views
+      video.view_count = views
 
-    response = HTTParty.get(video.url)
-    html = response.body
-            
-    # The caption data is not available via the api but we can easily
-    # grab it from the player configuration on the player page
-    caption_regex = /var config.*?=(?<config>.*?);/
+      response = HTTParty.get(video.url)
+      html = response.body
 
-    languages = []
+      # The caption data is not available via the api but we can easily
+      # grab it from the player configuration on the player page
+      caption_regex = /var config.*?=(?<config>.*?);/
 
-    if matches = html.match(caption_regex)
-      config = JSON.parse(matches[:config])
+      languages = []
 
-      text_tracks = config["request"]["text_tracks"]
-      
-      video.captioned = text_tracks.present?
+      if matches = html.match(caption_regex)
+        config = JSON.parse(matches[:config])
 
-      video.properties = text_tracks.try(:join, ", ")        
+        text_tracks = config["request"]["text_tracks"]
+
+        video.captioned = text_tracks.present?
+
+        video.properties = text_tracks.try(:join, ", ")
+      end
+    rescue
+      video.error!
+    else
+      video.processed!
     end
-    
-    video.processed!
   end
 end
 
