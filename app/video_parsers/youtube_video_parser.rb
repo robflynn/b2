@@ -8,6 +8,9 @@ class YoutubeVideoParser < VideoParser
     return videos
   end
 
+  def self.process(video:)
+  end
+
   private
 
   def self.parse_iframe_embed(html)

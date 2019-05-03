@@ -36,6 +36,43 @@
   </table>
 </section>
 
+<section class="videos">
+  <table class="table table--full table--left-text blue">
+    <thead>
+      <tr>
+        <th colspan="8">
+          <center>Unprocessed Videos</center>
+        </th>
+      </tr>
+      <tr>
+        <th>id</th>
+        <th>pid</th>
+        <th>page url</th>
+        <th>type</th>
+        <th>views</th>
+        <th>video source</th>
+        <th>properties</th>
+        <th>captioned?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @queue.each do |vid| %>
+      <tr>
+        <td><%= vid.id %></td>
+        <td><%= vid.page_id %></td>
+        <td><%= link_to(vid.page_url.truncate(100), vid.page_url) %></td>
+        <td><%= vid.embed_type %></td>
+        <td><%= vid.view_count %></td>
+        <td><%= link_to(vid.url.truncate(100), vid.url, target: "_blank") %></td>
+        <td><%= vid.properties %></td>
+        <td><%= vid.captioned? ? "yes" : "" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</section>
+
 <iframe id="csv_download_region" aria-hidden="true" style="display: none;"></iframe>
 
 <script>

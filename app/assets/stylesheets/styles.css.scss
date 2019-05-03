@@ -5,7 +5,8 @@ $colors: (
 	purple: $purple,
 	border: #888,
   header: #444,
-  button: $blue
+  button: $blue,
+  blue: $blue
 );
 
 $panel_padding: 10px;
@@ -85,7 +86,8 @@ section.stats {
 
 .table {
 	$cell_padding: 5px;
-	$border: solid 1px #888;
+  $border: solid 1px #888;
+  $headerColor: color($purple);
 
 	margin-top: 10px;
   border-collapse: collapse;
@@ -93,26 +95,26 @@ section.stats {
 	outline: 0;
 	border: $border;
 
-    &--centered-text {
-    	th,td {
-    		text-align: center;
-    	}
+  &--centered-text {
+    th,td {
+      text-align: center;
     }
+  }
 
-    &--left-text {
-    	th,td {
-    		text-align: left;
-    	}
+  &--left-text {
+    th,td {
+      text-align: left;
     }
+  }
 
-    &--full {
-    	width: 100%;
-    }
+  &--full {
+    width: 100%;
+  }
 
 	thead {
 		tr {
 			th {
-        background: rgb(119, 51, 135);
+        background: $headerColor;
 				padding: 5px;
 				color: #eee;
 				padding: $cell_padding;
@@ -141,6 +143,17 @@ section.stats {
 			}
 		}
 	}
+}
+
+// Colors
+.table {
+  &.blue thead tr th {
+    background: color(blue);
+  }
+
+  &.purple thead tr th {
+    background: color(purple);
+  }
 }
 
 .center {

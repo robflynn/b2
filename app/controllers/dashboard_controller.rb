@@ -17,7 +17,8 @@ class DashboardController < ApplicationController
   end
 
   def videos
-    @videos = @website.videos.includes(:page_for_delegation)
+    @videos = @website.videos.processed.includes(:page_for_delegation)
+    @queue = @website.videos.unprocessed.includes(:page_for_delegation)
   end
 
   def export_csv
