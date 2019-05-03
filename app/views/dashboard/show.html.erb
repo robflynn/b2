@@ -1,7 +1,7 @@
 <h1><%= @website.url %></h1>
 
 <section class="progress">
-	<div class="progress-bar">
+	<div class="progress-bar offline">
 		<div class="progress" data-progress="0" data-stat="progress"></div>
 	</div>
 </section>
@@ -70,6 +70,14 @@
 	function initialize() {
     update_stats();
     update_queue();
+  }
+
+  function update_crawl_status(status) {
+    if (status == 'stopped') {
+      $$('.progress-bar').classList.add('offline')
+    } else {
+      $$('.progress-bar').classList.remove('offline')
+    }
   }
 
   function update_progress(progress) {
@@ -143,6 +151,10 @@
             anchor.innerHTML = data[field]
             entity.innerHTML = '';
             entity.appendChild(anchor)
+          }
+
+          if (field == 'crawl_status') {
+            update_crawl_status(data[field])
           }
 
           // treat the progress bar differently

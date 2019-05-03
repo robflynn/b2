@@ -81,15 +81,24 @@ section.stats {
 	.progress {
 		background: orange;
     height: 100%;
-    transition: width 0.5s;
+    transition: all 0.75s;
     width: 0;
-	}
+  }
+
+  &.offline {
+    $offlineColor: #900;
+    background: $offlineColor;
+
+    .progress {
+      background: lighten($offlineColor, 10%);
+    }
+  }
 }
 
 .table {
 	$cell_padding: 5px;
   $border: solid 1px #888;
-  $headerColor: color($purple);
+  $headerColor: color($blue);
 
 	margin-top: 10px;
   border-collapse: collapse;
