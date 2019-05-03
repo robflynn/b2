@@ -9,6 +9,51 @@ class YoutubeVideoParser < VideoParser
   end
 
   def self.process(video:)
+    video.processing!
+
+    video_id_regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?(?<video_id>[^#\&\?]*).*/
+    youtube_config_regex = /&player_response=(?<config>{.*?})&/
+
+    begin
+      api_base_url = "https://youtube.com/get_video_info?video_id="
+
+      if matches = video.url.match(video_id_regex)
+        video_id = matches[:video_id]
+      else
+        # We could not parse the id, get outta here
+        raise "Could not parse youtube video_id"
+      end
+
+      api_url = "#{api_base_url}#{video_id}"
+
+      response = HTTParty.get(api_url)
+      data = CGI.unescape(response.body)
+
+      languages = []
+
+      if match = data.match(youtube_config_regex)
+        config = JSON.parse(match[:config])
+
+        config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].each do |track|
+          # We want to ignore asr tracks
+          next if track["kind"].present? && track["kind"] == "asr"
+
+          languages << track["languageCode"]
+
+          video.captioned = true
+        end
+
+        video.properties = languages.join(', ')
+
+        video.view_count = config["videoDetails"]["viewCount"].to_i
+      else
+        raise "Could not load youtube config"
+      end
+    rescue
+      video.error!
+    else
+      video.processed!
+    end
   end
 
   private

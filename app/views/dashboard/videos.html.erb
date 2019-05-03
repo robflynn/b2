@@ -36,6 +36,7 @@
   </table>
 </section>
 
+<% if @queue.any? %>
 <section class="videos">
   <table class="table table--full table--left-text blue">
     <thead>
@@ -72,6 +73,7 @@
     </tbody>
   </table>
 </section>
+<% end %>
 
 <iframe id="csv_download_region" aria-hidden="true" style="display: none;"></iframe>
 
