@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
   end
 
   def uncrawled
-    @pages = Page.uncrawled.select(:id, :url).order(created_at: :asc)
+    @pages = @website.pages.uncrawled.select(:id, :url).order(url: :asc)
   end
 
   def tester

@@ -70,6 +70,10 @@ section {
 
 section.stats {
   width: 50%;
+
+  thead th {
+    width: 100%/8;
+  }
 }
 
 .progress-bar {
