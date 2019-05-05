@@ -43,7 +43,8 @@ class Page < ApplicationRecord
     :processed,
     :crawl_error,
     :unknown_type_error,
-    :skipped
+    :skipped,
+    :redirected
   ]
 
   scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
