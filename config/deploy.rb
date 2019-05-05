@@ -40,4 +40,4 @@ append :linked_files, "config/master.key"
 # set :ssh_options, verify_host_key: :secure
 set :passenger_restart_with_touch, true
 set :rvm_type, :user
-set :rvm_ruby_version, '2.5.3@brooklyn'
+set :rvm_ruby_version, '2.5.3@webster-api'
