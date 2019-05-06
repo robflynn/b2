@@ -11,7 +11,8 @@ class YoutubeVideoParser < VideoParser
   def self.process(video:)
     video.processing!
 
-    video_id_regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?(?<video_id>[^#\&\?]*).*/
+    #video_id_regex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?(?<video_id>[^#\&\?]*).*/
+    video_id_regex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))(?<video_id>[^#\&\?]*).*/
     youtube_config_regex = /&player_response=(?<config>{.*?})&/
 
     begin
