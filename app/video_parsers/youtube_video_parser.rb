@@ -34,13 +34,16 @@ class YoutubeVideoParser < VideoParser
       if match = data.match(youtube_config_regex)
         config = JSON.parse(match[:config])
 
-        config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].each do |track|
-          # We want to ignore asr tracks
-          next if track["kind"].present? && track["kind"] == "asr"
 
-          languages << track["languageCode"]
+        if config['captions'].present?
+          config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].each do |track|
+            # We want to ignore asr tracks
+            next if track["kind"].present? && track["kind"] == "asr"
 
-          video.captioned = true
+            languages << track["languageCode"]
+
+            video.captioned = true
+          end
         end
 
         video.properties = languages.join(', ')
