@@ -58,7 +58,9 @@ class YoutubeVideoParser < VideoParser
       end # end if match
     rescue => e
       # Some error occurred
-      puts e.backtrace
+      # puts "The API URL was:"
+      # puts api_url
+      # puts e.backtrace
       video.error!
     else
       # There were no errors, lets get out of here
