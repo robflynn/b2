@@ -41,8 +41,8 @@ class Website < ApplicationRecord
   end
 
   def total_pages_crawled
-    checked_status = [:crawled, :skipped, :crawl_error]
-    pages.where(status: checked_status).count
+    unprocessed_statuses = [:uncrawled, :crawling]
+    pages.where.not(status: unprocessed_statuses).count
   end
 
   def apply_filters!
