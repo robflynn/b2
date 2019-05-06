@@ -37,6 +37,17 @@ class DashboardController < ApplicationController
     render :videos
   end
 
+  def error_videos
+    per_page = params[:per_page] || 250
+
+    @videos = @website.videos
+                      .error
+                      .includes(:page_for_delegation)
+                      .paginate(page: params[:page], per_page: per_page)
+
+    render :videos
+  end
+
 
   def filters
     @filters = @website.filters
