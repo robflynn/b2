@@ -12,7 +12,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  view_count :integer
-#  status     :integer          default({:unprocessed=>"unprocessed", :processing=>"processing", :processed=>"processed"})
+#  status     :integer          default("unprocessed")
 #
 # Indexes
 #
