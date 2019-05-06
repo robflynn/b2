@@ -75,8 +75,8 @@ class WebsitesController < APIController
       crawl_status: pages_per_second == 0 ? "stopped" : "crawling",
       num_videos: total_videos,
       num_videos_pending: @website.videos.pending.count,
-      num_videos_captioned: "#{captioned_percent}%",
-      num_videos_error: "#{error_percent}%",
+      num_videos_captioned: "#{@website.videos.where(captioned: true).count} (#{captioned_percent}%)",
+      num_videos_error: "#{@website.videos.error.count} (#{error_percent}%)",
       jobs: Delayed::Job.count
     }
 
