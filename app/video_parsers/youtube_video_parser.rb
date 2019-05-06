@@ -34,8 +34,7 @@ class YoutubeVideoParser < VideoParser
       if match = data.match(youtube_config_regex)
         config = JSON.parse(match[:config])
 
-
-        if config['captions'].present? && config['captions']['playerCaptionsTracklistRenderer'].present? && config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].present?
+        if config['captions'].present? && config['captions']['playerCaptionsTracklistRenderer'].present? && config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"]
           config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].each do |track|
             # We want to ignore asr tracks
             next if track["kind"].present? && track["kind"] == "asr"
@@ -43,21 +42,28 @@ class YoutubeVideoParser < VideoParser
             languages << track["languageCode"]
 
             video.captioned = true
-          end
-        end
+          end # end loop
+        end # end if track exist in json
 
+        # Log the languages in the properties column
         video.properties = languages.join(', ')
 
+        # Get the view count
         video.view_count = config["videoDetails"]["viewCount"].to_i
       else
-        raise "Could not load youtube config"
-      end
-    rescue
+        # We got here because the match failed, we couldn't get the youtube configuration
+        puts "Could not load youtube configuration"
+        raise "Could not load youtube configuration"
+      end # end if match
+    rescue => e
+      # Some error occurred
+      puts e.backtrace
       video.error!
     else
+      # There were no errors, lets get out of here
       video.processed!
-    end
-  end
+    end # end of begin block
+  end # end process
 
   private
 
