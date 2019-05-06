@@ -37,7 +37,10 @@ class VimeoVideoParser < VideoParser
     video.processing!
 
     # Grab the view count from this end point
-    api_url = video.url.gsub(/player\.vimeo\.com(\/video\/\d+)/, 'vimeo.com/api/v2\1.json')
+
+    video_url = video.url.gsub(/^\/\//, "https://")
+
+    api_url = video_url.gsub(/player\.vimeo\.com(\/video\/\d+)/, 'vimeo.com/api/v2\1.json')
 
     begin
       response = HTTParty.get(api_url)
@@ -47,7 +50,7 @@ class VimeoVideoParser < VideoParser
 
       video.view_count = views
 
-      response = HTTParty.get(video.url)
+      response = HTTParty.get(video_url)
       html = response.body
 
       # The caption data is not available via the api but we can easily
