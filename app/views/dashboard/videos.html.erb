@@ -18,6 +18,7 @@
         <th>video source</th>
         <th>properties</th>
         <th>captioned?</th>
+        <th>status</th>
         <th>updated</th>
       </tr>
     </thead>
@@ -33,6 +34,7 @@
         <td><%= link_to(vid.url.truncate(100), vid.url, target: "_blank") %></td>
         <td><%= vid.properties %></td>
         <td><%= vid.captioned? ? "yes" : "" %></td>
+        <td><%= vid.status %></td>
         <td class="nowrap"><%= vid.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
       </tr>
     <% end %>

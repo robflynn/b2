@@ -69,10 +69,11 @@ section {
 }
 
 section.stats {
-  width: 50%;
+  width: 75%;
 
   thead th {
-    width: 100%/8;
+    width: (100% / 6);
+    white-space: nowrap;
   }
 }
 
@@ -124,6 +125,10 @@ section.stats {
 
   &--full {
     width: 100%;
+  }
+
+  &--half {
+    width: 50%;
   }
 
 	thead {
@@ -244,5 +249,14 @@ section.page-queue {
 #download-csv-button {
   &.generating {
     background-image: linear-gradient(to bottom, color(green), darken(color(green), 10%)) !important;
+  }
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+
+  table + table {
+    margin-left: 10px;
   }
 }

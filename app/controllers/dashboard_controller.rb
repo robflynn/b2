@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
     per_page = params[:per_page] || 250
 
     @videos = @website.videos
-                      .processed
+                      .where(status: [:processed, :error])
                       .includes(:page_for_delegation)
                       .order(updated_at: :desc)
                       .paginate(page: params[:page], per_page: per_page)

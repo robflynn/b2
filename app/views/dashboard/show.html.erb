@@ -7,33 +7,59 @@
 </section>
 
 <section class="stats">
-	<table class="table table--centered-text table--full">
-		<thead>
-			<tr>
-				<th>%</th>
-				<th>Crawled</th>
-				<th>Total Pages</th>
-				<th>PPS</th>
-        <th>Videos</th>
-        <th>Videos Pending</th>
-        <th>Jobs</th>
-				<th>Time Remaining</th>
-			</tr>
-		</thead>
+  <div class="row">
+    <table class="table table--centered-text table--half">
+      <thead>
+        <tr>
+          <th colspan="6">
+            Pages
+          </th>
+        </tr>
+        <tr>
+          <th>%</th>
+          <th>Crawled</th>
+          <th>Total</th>
+          <th>Rate</th>
+          <th>Jobs</th>
+          <th>Time Remaining</th>
+        </tr>
+      </thead>
+      <tbody class="bordered">
+        <tr>
+          <td data-stat="percent">n/a</td>
+          <td data-stat="crawled_pages">n/a</td>
+          <td data-stat="total_pages">n/a</td>
+          <td data-stat="pages_per_second">n/a</td>
+          <td data-stat="jobs">n/a</td>
+          <td data-stat="time_remaining">n/a</td>
+        </tr>
+      </tbody>
+    </table>
 
-		<tbody class="bordered">
-			<tr>
-				<td data-stat="percent">n/a</td>
-        <td data-stat="crawled_pages">n/a</td>
-        <td data-stat="total_pages">n/a</td>
-        <td data-stat="pages_per_second">n/a</td>
-        <td data-stat="num_videos">n/a</td>
-        <td data-stat="num_videos_pending">n/a</td>
-        <td data-stat="jobs">n/a</td>
-        <td data-stat="time_remaining">n/a</td>
-			</tr>
-		</tbody>
-	</table>
+    <table class="table table--centered-text table--half">
+      <thead>
+        <tr>
+          <th colspan=4>
+            Videos
+          </th>
+        </tr>
+        <tr>
+          <th>Processed</th>
+          <th>Unprocessed</th>
+          <th>% Captioned</th>
+          <th>% Error</th>
+        </tr>
+      </thead>
+      <tbody class="bordered">
+        <tr>
+          <td data-stat="num_videos">n/a</td>
+          <td data-stat="num_videos_pending">n/a</td>
+          <td data-stat="num_videos_captioned">n/a</td>
+          <td data-stat="num_videos_error">n/a</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <section class="page-queue">

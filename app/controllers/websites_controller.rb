@@ -61,6 +61,11 @@ class WebsitesController < APIController
     crawled_pages = @website.total_pages_crawled
     total_pages = @website.pages.count
 
+    total_videos = @website.videos.processed.count
+
+    captioned_percent = ((@website.videos.where(captioned: true).count.to_f / total_videos) * 100).round(2)
+    error_percent = ((@website.videos.error.count.to_f / total_videos) * 100).round(2)
+
     @stats = {
       crawled_pages: crawled_pages,
       total_pages: total_pages,
@@ -68,8 +73,10 @@ class WebsitesController < APIController
       pages_per_second: pages_per_second.round(2),
       time_remaining: WebsiteService.crawl_time_remaining(website: @website),
       crawl_status: pages_per_second == 0 ? "stopped" : "crawling",
-      num_videos: @website.videos.processed.count,
+      num_videos: total_videos,
       num_videos_pending: @website.videos.pending.count,
+      num_videos_captioned: "#{captioned_percent}%",
+      num_videos_error: "#{error_percent}%",
       jobs: Delayed::Job.count
     }
 
