@@ -47,9 +47,11 @@ class Page < ApplicationRecord
     :redirected
   ]
 
+  # Helper
+  scope :not, ->(scope_name) { where(send(scope_name).where_values.reduce(:and).not) }
   scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
-  scope :visited,  -> { where(status: [:skipped, :crawl_error, :crawled]) }
   scope :not_visited, -> { where(status: [:uncrawled, :crawling]) }
+  scope :visited,  -> { where(status: [:skipped, :crawl_error, :crawled, :processing, :processed]) }
   scope :with_url_containing, -> (query) { where("url LIKE ?", "%#{query}%") }
 
   belongs_to :website

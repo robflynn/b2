@@ -35,7 +35,7 @@ class YoutubeVideoParser < VideoParser
         config = JSON.parse(match[:config])
 
 
-        if config['captions'].present?
+        if config['captions'].present? && config['captions']['playerCaptionsTracklistRenderer'].present? && config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].present?
           config["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].each do |track|
             # We want to ignore asr tracks
             next if track["kind"].present? && track["kind"] == "asr"
