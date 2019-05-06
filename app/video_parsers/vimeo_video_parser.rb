@@ -59,11 +59,13 @@ class VimeoVideoParser < VideoParser
       if matches = html.match(caption_regex)
         config = JSON.parse(matches[:config])
 
-        text_tracks = config["request"]["text_tracks"]
+        if config["request"].present? && config["request"]["text_tracks"].present?
+          text_tracks = config["request"]["text_tracks"]
 
-        video.captioned = text_tracks.present?
+          video.captioned = text_tracks.present?
 
-        video.properties = text_tracks.try(:join, ", ")
+          video.properties = text_tracks.try(:join, ", ")
+        end
       end
     rescue
       video.error!
