@@ -18,6 +18,7 @@
 #  channel_name :string
 #  channel_id   :string
 #  api_response :text
+#  channel_url  :string
 #
 # Indexes
 #
@@ -55,13 +56,7 @@ class Video < ApplicationRecord
     false
   end
 
-  def channel_url
-    case embed_type
-    when "youtube"
-      return "https://youtube.com/channel/#{channel_id}"
-    else
-      return nil
-    end
+  def youtube_channel_url
+    return "https://youtube.com/channel/#{channel_id}"
   end
-
 end

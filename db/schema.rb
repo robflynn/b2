@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_181710) do
+ActiveRecord::Schema.define(version: 2019_05_07_202806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_181710) do
     t.string "channel_name"
     t.string "channel_id"
     t.text "api_response"
+    t.string "channel_url"
     t.index ["embed_type"], name: "index_videos_on_embed_type"
     t.index ["page_id"], name: "index_videos_on_page_id"
     t.index ["status"], name: "index_videos_on_status"

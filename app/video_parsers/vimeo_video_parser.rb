@@ -46,9 +46,15 @@ class VimeoVideoParser < VideoParser
       response = HTTParty.get(api_url)
       response = JSON.parse(response.body)
 
-      views = response.first["stats_number_of_plays"].to_i
+      data = response.first
 
-      video.view_count = views
+      video.view_count = data["stats_number_of_plays"]
+      video.duration = data["duration"]
+      video.channel_name = data['user_name']
+      video.channel_id = data['user_id']
+      video.title = data['title']
+      video.channel_url = data['user_url']
+      video.api_response = data.to_json
 
       response = HTTParty.get(video_url)
       html = response.body

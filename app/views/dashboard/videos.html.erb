@@ -34,7 +34,7 @@
         <td><%= vid.embed_type %></td>
         <td><%= vid.view_count %></td>
         <td><%= vid.duration %></td>
-        <td><%= link_to_if(vid.channel_id.present?, vid.channel_name, vid.channel_url) %></td>
+        <td><%= link_to_if(vid.channel_url.present?, vid.channel_name, vid.channel_url) %></td>
         <td><%= link_to(vid.url.truncate(100), vid.url, target: "_blank") %></td>
         <td><%= vid.properties %></td>
         <td><%= vid.captioned? ? "yes" : "" %></td>
