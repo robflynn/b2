@@ -51,6 +51,11 @@ class YoutubeVideoParser < VideoParser
 
         # Get the view count
         video.view_count = config["videoDetails"]["viewCount"].to_i
+        video.channel_id = config["videoDetails"]["channelId"]
+        video.channel_name = config["videoDetails"]["author"]
+        video.duration = config["videoDetails"]["lengthSeconds"]
+        video.title = config["videoDetails"]["title"]
+        video.api_response = config.to_json
       else
         # We got here because the match failed, we couldn't get the youtube configuration
         puts "Could not load youtube configuration"
