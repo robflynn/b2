@@ -25,7 +25,7 @@ module VideoService
 
     def get_csv(website:)
       result = CSV.generate do |csv|
-        csv << ["id", "pid", "page title", "page url", "embed_type", "view_count", "video_source", "properties", "tracks", "updated_at", "status"]
+        csv << ["id", "pid", "page title", "page url", "embed_type", "view_count", "video_source", "properties", "tracks", "updated_at", "status", "duration", "video_title", "channel_name", "channel_id", "channel_url"]
 
         website.videos.includes(:page_for_delegation).order(updated_at: :desc).each do |v|
           csv << [
@@ -39,7 +39,12 @@ module VideoService
             v.properties,
             v.captioned? ? true : "",
             v.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
-            v.status
+            v.status,
+            v.duration,
+            v.title,
+            v.channel_name,
+            v.channel_id,
+            v.channel_url
           ]
         end
       end
